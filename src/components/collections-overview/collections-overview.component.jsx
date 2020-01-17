@@ -9,7 +9,7 @@ import './collections-overview.styles.scss';
 import CollectionPreview from '../collection-preview/collection-preview.component';
 
 // Redux actions
-import { selectShopCollections } from '../../redux/shop/shop.selector'
+import { selectCollections } from '../../redux/shop/shop.selector'
 
 
 const CollectionsOverview = ({ collections }) => (
@@ -23,7 +23,7 @@ const CollectionsOverview = ({ collections }) => (
 )
 
 const mapStateToProps = createStructuredSelector({
-  collections: selectShopCollections
+  collections: selectCollections
 })
 
 export default connect(mapStateToProps)(CollectionsOverview);
