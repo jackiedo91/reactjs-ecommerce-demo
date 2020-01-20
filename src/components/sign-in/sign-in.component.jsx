@@ -1,12 +1,20 @@
 import React from 'react';
+
 // ThirdParty
 import { auth, signInWithGoogle } from '../../firebase/firebase.utls';
 
-// Styling
-import './sign-in.styles.scss';
+// Styling component
+import {
+  SignInContainer,
+  SignInTitle,
+  ButtonsBarContainer
+} from './sign-in.styles';
+
 // Custom Component
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
+
+// Redux actions
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -42,8 +50,8 @@ class SignIn extends React.Component {
 
   render() {
     return(
-      <div className='sign-in'>
-        <h2>I already have an account</h2>
+      <SignInContainer>
+        <SignInTitle>I already have an account</SignInTitle>
         <span>Sign in with your email and password</span>
         <form onSubmit={this.handleSubmit}  >
           <FormInput
@@ -64,19 +72,20 @@ class SignIn extends React.Component {
             label='password'
             />
 
-          <div className="buttons">
+          <ButtonsBarContainer>
             <CustomButton type='Submit'>SIGN IN</CustomButton>
             <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
               {' '}
               Sign in with Google
               {' '}
             </CustomButton>
-          </div>
+          </ButtonsBarContainer>
         </form>
-      </div>
+      </SignInContainer>
     )
   }
 }
+
 
 
 export default SignIn;
