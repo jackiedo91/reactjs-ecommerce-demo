@@ -14,7 +14,7 @@ import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up
 import CheckoutPage from './pages/checkout/checkout.component';
 
 // Third Parties
-import { auth, createUserProfileDocument } from './firebase/firebase.utls';
+import { auth, createUserProfileDocument, addCollectionAndItems } from './firebase/firebase.utls';
 
 // Redux Actions
 import { setCurrentUser } from './redux/user/user.actions';
@@ -41,6 +41,7 @@ class App extends React.Component {
         })
       } else {
         setCurrentUser(userAuth);
+        addCollectionAndItems('collection')
       }
 
       //
