@@ -21,11 +21,8 @@ const CollectionPageWithSpinner = WithSpinner(CollectionPage);
 
 class ShopPage extends React.Component {
 
-  constructor() {
-    super();
-    this.state = {
-      loading: true
-    }
+  state = {
+    loading: true
   }
 
   unsubscribeFromSnapshot = null;
@@ -34,11 +31,29 @@ class ShopPage extends React.Component {
     const { updateCollections } = this.props;
     const collectionRef = firestore.collection('collections')
 
-    this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapshot => {
+    //// Method 1: using firebase method with promises
+    collectionRef.get().then(snapshot => {
       const collectionsMap = convertCollectionsSnapshotToMap(snapshot)
       updateCollections(collectionsMap)
       this.setState({ loading: false });
-    })
+    });
+
+    //// Method 2: Using native fetch
+    // fetch('https://firestore.googleapis.com/v1/projects/reactjs-crwn-demo/databases/(default)/collections', {
+    //   headers: {
+    //     "Access-Control-Allow-Origin": "*",
+    //     "Access-Control-Allow-Methods": "GET,POST,DELETE,HEAD,PUT,OPTIONS",
+    //     "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+    //   }})
+    //   .then(response => response.json())
+    //   .then(collections => console.log(collections))
+
+    //// Method 3: Using firebase method
+    // this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapshot => {
+    //   const collectionsMap = convertCollectionsSnapshotToMap(snapshot)
+    //   updateCollections(collectionsMap)
+    //   this.setState({ loading: false });
+    // })
   }
 
   render() {
